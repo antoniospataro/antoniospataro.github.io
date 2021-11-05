@@ -5,16 +5,18 @@ category: writeups
 
 It was one of the many days in which I turned on twitter to read something interesting when I discovered, for the first time, a challenge of intigriti, so I thought, why not do it! So, I tried my first intigriti ctf.
 
-#Obtain information
+# Obtain information
 The challenge starts by giving you a `?html` parameter in the page content that you can use on the site to test it.
 
-the first thing i tried was injecting some text, some tags and some javascript. There was an HTML injection, but upon inspecting the page, it was clear why the javascript could not run. On the site, there was a CSP (Content Security Policy).[^1]
+the first thing i tried was injecting some text, some tags and some javascript. There was an HTML injection, but upon inspecting the page, it was clear why the javascript could not run. On the site, there was a CSP (Content Security Policy)[^1].
 
-i![html](https://github.com/antoniospataro/antoniospataro.github.io/img/html-inj.png){:.ioda}
-[^1]: HTML inj and CSP
-i![csp](https://github.com/antoniospataro/antoniospataro.github.io/img/CSP.png){:.ioda}
+![html](https://github.com/antoniospataro/antoniospataro.github.io/img/html-inj.png){:.ioda}
 
-quickly reading the CSP you can realize that it is not possible to execute any javascript inline except for two scripts already included in the source. What we will need will be the second script.[^2]
+[^1] : HTML inj and CSP
+
+![csp](https://github.com/antoniospataro/antoniospataro.github.io/img/CSP.png){:.ioda}
+
+quickly reading the CSP you can realize that it is not possible to execute any javascript inline except for two scripts already included in the source. What we will need will be the second script[^2].
 
 [^2]: Code:
 ```
@@ -51,7 +53,7 @@ Finally, the script will paste the final variable c to the bottom of the body to
 Now it is possible to notice how in the first photo there is an error in the execution of the js code created by the script, due to the fact that the parenthesis ) of ")]}" is not well indented. 
 
 # Solve
-##to solve the challenge it is necessary:
+## to solve the challenge it is necessary:
 1. Inject a </h1> tag to close the string.
 2. Inject a </div> tag to return to the body.
 3. Inject any tag with id = "intigriti".
@@ -61,7 +63,7 @@ Now it is possible to notice how in the first photo there is an error in the exe
 
 There is the possibility to create a lot of different payloads to solve the challenge.
 
-i![solution](https://github.com/antoniospataro/antoniospataro.github.io/img/hallowXss.png){:.ioda}
+![solution](https://github.com/antoniospataro/antoniospataro.github.io/img/hallowXss.png){:.ioda}
 [
 My final payload --> <a href="https://challenge-1021.intigriti.io/challenge/challenge.php?xss=%0Aalert(document.domain)&html=SpasticMMonkey%3C/h1%3E%3C/div%3E%3Cdiv%20id=%22intigriti%22%3E%3Cdiv%20id=%22LOL%22%3E%3Cdiv%20class=%22a%22%3E%27%22%3C/div%3E%3C/body%3E%3Cs%27[(%3EI%3C/span%3E%3C!--">here</a>
 

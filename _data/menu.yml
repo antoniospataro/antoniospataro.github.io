@@ -5,7 +5,7 @@ entries:
         entries:
           - title: CV
             url: https://antoniospataro.github.io/cv.pdf
-          - title: "contact me <a href='mailto:3m41L'>here</a>"
+          - title: "contact me <a href='mailto:3m41L'>here</a> if you know how to it"
       - title: Blog Posts
         post_list:
           limit: 5
