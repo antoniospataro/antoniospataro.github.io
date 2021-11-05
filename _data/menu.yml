@@ -1,13 +1,14 @@
 entries:
-  Cyber Security enthusiast from Italy, I enjoy to play hacking competitions and get better. Posting writeups and other stuff to remember me what I do :) 
-  - title: Info
+  - title: Cyber Security enthusiast from Italy, I enjoy to play hacking competitions and get better. Posting writeups and other stuff to remember me what I do :) 
     entries:
-      - title: CV
-        url: https://antoniospataro.github.io/cv.pdf
-      - title: "contact me <a href='mailto:3m41L'>here</a>"
-  - title: Blog Posts
-    post_list:
-      limit: 5
-      show_more: true
-      show_more_text: See archive...
-      show_more_url: archive.html
+      - title: Info
+        entries:
+          - title: CV
+            url: https://antoniospataro.github.io/cv.pdf
+          - title: "contact me <a href='mailto:3m41L'>here</a>"
+      - title: Blog Posts
+        post_list:
+          limit: 5
+          show_more: true
+          show_more_text: See archive...
+          show_more_url: archive.html
