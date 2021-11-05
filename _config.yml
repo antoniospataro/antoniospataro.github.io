@@ -20,7 +20,7 @@
 
 title: Antonio Spataro
 email: your-email@example.com
-description: antonio spataro hacking writeups bug bounty >- # this means to ignore newlines until "baseurl:"
+description: >- # this means to ignore newlines until "baseurl:"
    antonio spataro hacking writeups bug bounty
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
