@@ -37,7 +37,7 @@ In the first line, it creates a string equal to `)]}'VALUE`, where VALUE can be 
 
 Subsequently, the last element of the tag with `id="body"` will be saved in a variable c. If the id of this last element is equal to "intigriti", then it will save the last element of the tag with `id="intigriti"` in a new variable and add the last four letters to the string c.
 
-For example, if the last element tag with id="intigriti" was `<abcd> </abcd>`:
+For example, if the last element of the tag with id="intigriti" was `<abcd> </abcd>`:
 ```
 var c before if ---> ")]}'VALUE"
 var c after if  ---> "bcd>)]}'VALUE"
