@@ -10,9 +10,9 @@ The challenge starts by giving you a `?html` parameter in the page content that 
 
 the first thing i tried was injecting some text, some tags and some javascript. There was an HTML injection, but upon inspecting the page, it was clear why the javascript could not run. On the site, there was a CSP (Content Security Policy)[^1].
 
-![html](https://antoniospataro.github.io/img/html-inj.png){:.ioda}
+![html](https://antoniospataro.github.io/img/html-inj.png)
 
-![csp](https://antoniospataro.github.io/img/CSP.png){:.ioda}
+![csp](https://antoniospataro.github.io/img/CSP.png)
 
 quickly reading the CSP you can realize that it is not possible to execute any javascript inline except for two scripts already included in the source. What we will need will be the second script.
 ```
@@ -58,9 +58,9 @@ Now it is possible to notice how in the first photo there is an error in the exe
 
 There is the possibility to create a lot of different payloads to solve the challenge.
 
-![solution](https://antoniospataro.github.io/img/hallowXss.png){:.ioda}
+![solution](https://antoniospataro.github.io/img/hallowXss.png)
 
-###### My final payload --> <a href="https://challenge-1021.intigriti.io/challenge/challenge.php?xss=%0Aalert(document.domain)&html=SpasticMMonkey%3C/h1%3E%3C/div%3E%3Cdiv%20id=%22intigriti%22%3E%3Cdiv%20id=%22LOL%22%3E%3Cdiv%20class=%22a%22%3E%27%22%3C/div%3E%3C/body%3E%3Cs%27[(%3EI%3C/span%3E%3C!--">here</a>
+##### My final payload --> <a href="https://challenge-1021.intigriti.io/challenge/challenge.php?xss=%0Aalert(document.domain)&html=SpasticMMonkey%3C/h1%3E%3C/div%3E%3Cdiv%20id=%22intigriti%22%3E%3Cdiv%20id=%22LOL%22%3E%3Cdiv%20class=%22a%22%3E%27%22%3C/div%3E%3C/body%3E%3Cs%27[(%3EI%3C/span%3E%3C!--">here</a>
 
 
 
