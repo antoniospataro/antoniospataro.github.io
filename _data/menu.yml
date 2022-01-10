@@ -5,7 +5,7 @@ entries:
         entries:
           - title: CV
             url: https://antoniospataro.github.io/cv.pdf
-          - title: "contact me <a href='mailto:antonioroccospataro@gmail.com'> here </a>"
+          - title: "if you want contact me for a job or only just ask me something, drop a line <a href='mailto:antonioroccospataro@gmail.com'> here </a>"
           - title: "find a nice page <a href='mailto:3m41L.html'> :) </a>"
       - title: Blog Posts
         post_list:
