@@ -3,7 +3,7 @@ layout: post
 category: writeups
 ---
 
-A month ago i was trying to hack a company that had just invited me to its bug bounty program. The company had been running the program since 2017, so I didn't expect to find much, because I knew it had been tested by tons of bug hunters. Looking at the leaderboard the situation did not improve, there were so many great hackers from the world to 100. I decided to focus on the main site.
+A month ago i was trying to hack a company that had just invited me to its bug bounty program. The company had been running the program since 2017, so I didn't expect to find much, because I knew it had been tested by tons of bug hunters. Looking at the leaderboard the situation did not improve, there were so many great hackers from the ranking of the top 100 in the world. I decided to focus on the main site.
 After half an hour of searching I had found only a low vulnerability (closed with a $ X00 payment). I really wanted to find something a little more serious for personal satisfaction and so I continued to dig deep into the site. 
 
 # Found a redirect parameter!
