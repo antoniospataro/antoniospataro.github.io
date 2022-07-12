@@ -1,6 +1,12 @@
 entries:
   - title: I’m an Independent Security Researcher and master cyber security student from Italy. I’m currently working in the cybersecurity sector mainly as a part time Bug Bounty Hunter and Penetration Tester, I enjoy to play hacking competitions and get better. You can check writeups and other stuff on topics related to cybersecurity and Bug Bounty in this blog
     entries:
+      - title: Some things I brag about
+        entries:
+          - title: "Telecom Italia's <a href='https://www.gruppotim.it/en/footer/responsible-disclosure.html'> Responsible Disclosure Hall of Fame </a>"
+          - title: "Top 10 in a famous cryptocurrency website with Private Bug Bounty Hall of Fame subject to non disclosure agreement"
+          - title: "XVIDEOS's <a href='https://hackerone.com/xvideos/thanks'> Bug Bounty Hall of Fame </a>"
+          - title: "A lot of things I can't share in public :("
       - title: Info
         entries:
           - title: CV
