@@ -1,20 +1,20 @@
 entries:
   - title: I’m an Independent Security Researcher and master cyber security student from Italy. I’m currently working in the cybersecurity sector mainly as a part time Bug Bounty Hunter and Penetration Tester, I enjoy to play hacking competitions and get better. You can check writeups and other stuff on topics related to cybersecurity and Bug Bounty in this blog
     entries:
-      - title: Some things I brag about
+      - title: <b>Some things I brag about</b>
         entries:
           - title: "<a href='https://nvd.nist.gov/vuln/detail/CVE-2022-4105'><b>CVE-2022-4105 </b></a> Stored XSS in KiwiTCMS library leads to account takeover and exploitation of various endpoints. Possibility of wormable XSS to broke the system."
           - title: "Telecom Italia's <a href='https://www.gruppotim.it/en/footer/responsible-disclosure.html'> Responsible Disclosure Hall of Fame </a>"
           - title: "Top 10 in a famous cryptocurrency website with Private Bug Bounty Hall of Fame subject to non disclosure agreement"
           - title: "XVIDEOS's <a href='https://hackerone.com/xvideos/thanks'> Bug Bounty Hall of Fame </a>"
           - title: "A lot of things I can't share in public :("
-      - title: Info
+      - title: <b>Info</b>
         entries:
           - title: CV
             url: https://antoniospataro.github.io/cv.pdf
           - title: "if you want contact me for a job or only just ask me something, drop a line <a href='mailto:antonioroccospataro@gmail.com'> here </a>"
           - title: "find a nice bug <a href='mailto:3m41L.html'> :) </a>"
-      - title: Blog Posts
+      - title: <b>Blog Posts</b>
         post_list:
           limit: 5
           show_more: true
