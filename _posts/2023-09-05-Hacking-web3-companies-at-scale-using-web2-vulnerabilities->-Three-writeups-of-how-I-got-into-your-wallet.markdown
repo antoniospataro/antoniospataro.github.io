@@ -3,13 +3,11 @@ layout: post
 category: writeups
 ---
 
-# Hacking Web3 Companies at scale using Web2 vulnerabilities -> Three writeups of how I got into your wallet
-
 During July, during a long session of university exams, I wanted to spend some time having fun hacking some applications and doing some ctf. I was really tired of studying for the exams and so I thought of setting myself some other goal besides the exams. Not having any specific bug bounty program in mind, I thought I'd take a look at web2 vulnerabilities in various Cryptocurrency platforms that had a bug bounty program.
 
 Bug bounty programs related to Cryptocurrencies often have large bounties so it could be a fun and profitable target. The only problem is that the cyber security posture in these types of companies is often not well distributed. For vulnerabilities in web3 that can cause financial loss, we read about absurd bounties. On the other hand, however, vulnerabilities in web2 are often not well treated and, in some really serious cases, even large protocols really avoid them, not considering that even a web2 vulnerability could create great financial losses. A critical web vulnerability in an exchange should be as bad as a vulnerability in the protocol. A vulnerability in an admin panel that leaks sensitive data should be the same. It is really absurd to think that a decentralized system, but one that uses non-decentralized web2 infrastructures, cannot be hacked from the surface.
 
-In this report, I analyze three vulnerabilities found during my +week of bug bounty, which could have caused serious damage to some of the most popular exchange platforms and protocols. I won't name the programs for privacy reasons, some company do not want to be mentioned in any way, I will only explain the technical level reports, the impact they could have had and how the teams handled it, possibly paying an appropriate reward to the problem and resolving it quickly. After this long premise, it's time to start :)
+In this report, I analyze three vulnerabilities found during my week of bug bounty, which could have caused serious damage to some of the most popular exchange platforms and protocols. I won't name the programs for privacy reasons, some company do not want to be mentioned in any way, I will only explain the technical level reports, the impact they could have had and how the teams handled it, possibly paying an appropriate reward to the problem and resolving it quickly. After this long premise, it's time to start :)
 
 
 ## Writeup 1 - Blind XSS in Admin Panel at subdomain.target1.com
