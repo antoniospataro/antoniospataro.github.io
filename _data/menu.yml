@@ -10,9 +10,9 @@ entries:
           - title: "Top 10 in a famous cryptocurrency website with Private Bug Bounty Hall of Fame subject to non disclosure agreement"
           - title: "XVIDEOS's <a href='https://hackerone.com/xvideos/thanks'> Bug Bounty Hall of Fame </a>"
           - title: "A lot of things I can't share in public :("
-      - title: <b>Info</b>
+      - title: if you want contact me for a job, for my resume or only just ask me something, drop a line <a href='mailto:antonioroccospataro@gmail.com'> here </a>
         entries:
-          - title: "if you want contact me for a job, for my resume or only just ask me something, drop a line <a href='mailto:antonioroccospataro@gmail.com'> here </a>"
+          - title: 
       - title: <b>Blog Posts</b>
         post_list:
           limit: 5
