@@ -97,15 +97,15 @@ The attack only worked thanks to the redirect endpoint found by analyzing and fu
 `https://target3.com/mobileRedir?email=victim%40gmail.com&token=AAAAAAAAAAAAAAAAAAAAAAAAAAAAA&platform=mobile`
 
 
-    1. The attacker who wants to steal the victim's account will go to the Mobile App, and will try to register the account with the email `victim@gmail.com` and a password like `ciao1234!`.
-    2. The victim will receive an email to confirm the creation of the account. The victim will obviously not confirm the account
-    3. The attacker will go via his smartphone to the following link: `https://target3.com/mobileRedir?email=victim%40gmail.com&token=AAAAAAAAAAAAAAAAAAAAAAAAAAAAA&platform=mobile` (PS. note that the attacker, not knowing the code received via email from the victim, will insert a random Token code into the endpoint, in this case)
-   4. The attacker will be presented with a target3.com page via browser where he must press a button to try to verify the account. By pressing the button, the attacker will be redirected to the application and if the Token is wrong nothing will happen.
-   5. The attacker returns to the browser and changes from the previous link the account Token Code with a new random Token and continues to press the generated button.
-    6. If the Token is wrong too many times, the code sent to the victim will no longer work. Attacker's ip in most cases will be banned by Cloudflare.
-    7. Now every time the attacker presses the button, he will first be redirected to the Mobile App and then back to the browser after the app crashes.
-    8. The attacker try to open the Mobile app normally. The first time it will crash. The attacker tries to reopen the Mobile App.
-    9. The app will open and the attacker will go to login and enter the credentials previously used in the registration phase, although the account has never been validated with the right Token Code.
+1. The attacker who wants to steal the victim's account will go to the Mobile App, and will try to register the account with the email `victim@gmail.com` and a password like `ciao1234!`.
+2.The victim will receive an email to confirm the creation of the account. The victim will obviously not confirm the account
+3. The attacker will go via his smartphone to the following link: `https://target3.com/mobileRedir?email=victim%40gmail.com&token=AAAAAAAAAAAAAAAAAAAAAAAAAAAAA&platform=mobile` (PS. note that the attacker, not knowing the code received via email from the victim, will insert a random Token code into the endpoint, in this case)
+4. The attacker will be presented with a target3.com page via browser where he must press a button to try to verify the account. By pressing the button, the attacker will be redirected to the application and if the Token is wrong nothing will happen.
+5. The attacker returns to the browser and changes from the previous link the account Token Code with a new random Token and continues to press the generated button.
+6. If the Token is wrong too many times, the code sent to the victim will no longer work. Attacker's ip in most cases will be banned by Cloudflare.
+7. Now every time the attacker presses the button, he will first be redirected to the Mobile App and then back to the browser after the app crashes.
+8. The attacker try to open the Mobile app normally. The first time it will crash. The attacker tries to reopen the Mobile App.
+9. The app will open and the attacker will go to login and enter the credentials previously used in the registration phase, although the account has never been validated with the right Token Code.
 
 **Now the attacker will be logged into the victim's account, despite never entering the correct verification code.**
 
