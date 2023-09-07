@@ -97,6 +97,8 @@ The attack only worked thanks to the redirect endpoint found by analyzing and fu
 `https://target3.com/mobileRedir?email=victim%40gmail.com&token=AAAAAAAAAAAAAAAAAAAAAAAAAAAAA&platform=mobile`
 
 
+### POC
+
 1. The attacker who wants to steal the victim's account will go to the Mobile App, and will try to register the account with the email `victim@gmail.com` and a password like `ciao1234!`.
 2.The victim will receive an email to confirm the creation of the account. The victim will obviously not confirm the account
 3. The attacker will go via his smartphone to the following link: `https://target3.com/mobileRedir?email=victim%40gmail.com&token=AAAAAAAAAAAAAAAAAAAAAAAAAAAAA&platform=mobile` (PS. note that the attacker, not knowing the code received via email from the victim, will insert a random Token code into the endpoint, in this case)
