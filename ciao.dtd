@@ -1,5 +1,0 @@
-<!ENTITY % file SYSTEM "file:///mnt/c/Users/claud/Downloads/genoveffa.txt">
-<!ENTITY % start "<![CDATA[">
-<!ENTITY % end "]]>">
-<!ENTITY % all "<!ENTITY fileContents 
-'%start;%file;%end;'>">

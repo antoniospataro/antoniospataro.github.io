@@ -12,12 +12,7 @@ entries:
           - title: "A lot of things I can't share in public :("
       - title: <b>Info</b>
         entries:
-          - title: Resume
-            url: https://antoniospataro.github.io/cv.pdf
-          - title: Simple Resume
-            url: https://antoniospataro.github.io/simple-cv.pdf
-          - title: "if you want contact me for a job or only just ask me something, drop a line <a href='mailto:antonioroccospataro@gmail.com'> here </a>"
-          - title: "find a nice bug <a href='mailto:3m41L.html'> :) </a>"
+          - title: "if you want contact me for a job, for my resume or only just ask me something, drop a line <a href='mailto:antonioroccospataro@gmail.com'> here </a>"
       - title: <b>Blog Posts</b>
         post_list:
           limit: 5
