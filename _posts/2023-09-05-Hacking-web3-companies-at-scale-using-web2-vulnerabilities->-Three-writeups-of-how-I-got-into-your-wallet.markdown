@@ -10,7 +10,7 @@ Bug bounty programs related to Cryptocurrencies often have large bounties so it 
 In this report, I analyze three vulnerabilities found during my week of bug bounty, which could have caused serious damage to some of the most popular exchange platforms and protocols. I won't name the programs for privacy reasons, some company do not want to be mentioned in any way, I will only explain the technical level reports, the impact they could have had and how the teams handled it, possibly paying an appropriate reward to the problem and resolving it quickly. After this long premise, it's time to start :)
 
 
-## Writeup 1 - Blind XSS in Admin Panel at subdomain.target1.com
+## Writeup 1 - Polygon Protocol - Blind XSS in Admin Panel at subdomain.polygon.technology
 
 I had chosen a goal with really big rewards, as hacking such a program I found it really captivating and created a beautiful sense of challenge in me.
 
@@ -18,15 +18,15 @@ Reading the policy, it seemed they almost exclusively wanted vulnerabilities on 
 
 I started by doing a quick recon phase and intercepting requests on main domains using Burp Suite. During the Recon phase I came across a particular subdomain that inspired me. Arrived at the subdomain `subdomain.target1.com` which was mainly used by administrators, I had no access to almost any page, since I didn't have an account.
 
-Looking at the `robots.txt` file I found a promising path like this `subdomain.target1.com/panel/*`. Obviously, it was time to do some fuzzing :)
+Looking at the `robots.txt` file I found a promising path like this `subdomain.polygon.technology/panel/*`. Obviously, it was time to do some fuzzing :)
 
-Using ffuf I managed to find a search path `subdomain.target1.com/panel/admin/search`. All the other domain paths found returned 403 or gave me redirects at the login phase and I was unable to bypass them in any way. Through this endpoint I was able to search even if I was not logged in. Unfortunately, since I was not logged in, the search never produced any results. At first glance I tried with SQL injection but without getting any results. Right away I tried Blind XSS. This time, unexpectedly, it worked. 
+Using ffuf I managed to find a search path `subdomain.polygon.technology/panel/admin/search`. All the other domain paths found returned 403 or gave me redirects at the login phase and I was unable to bypass them in any way. Through this endpoint I was able to search even if I was not logged in. Unfortunately, since I was not logged in, the search never produced any results. At first glance I tried with SQL injection but without getting any results. Right away I tried Blind XSS. This time, unexpectedly, it worked. 
 
 Thanks to blind XSS I managed to get a pingback. Analyzing the response of the page in question, I noticed that there were admin functions, and that the admin had access to a lot of user information. I started writing a script to use with Blind XSS to leak possible data and to attach to the report I was going to make. Below a possible code:
 
 
 ```
-var a = await fetch('https://subdomain.target1.com/admin/users');
+var a = await fetch('https://subdomain.polygon.technology/admin/users');
 var req = await a.text();
 
 var patt = /<a[^>]*href=["'](\/admin\/users\/[^"']*)["']/g;
@@ -44,7 +44,27 @@ Ability to exfiltrate data such as payment methods, passwords, ID cards, transac
 
 Once the report was made, the company explicitly said that web2 vulnerabilities are usually out of scope, but given the serious impact they would have taken it into consideration and let me know. After a few weeks they closed the report as out of scope without even giving me a bonus bounty. 
 
+I reported the bug as `Primacy of Impact Exception`, because I considered it such. In their policy, more precisely, this was written:
+
+```
+Impacts only apply to assets in active use by the project like contracts on mainnet or web/app assets used in production.
+
+```
+**mainnet or web/app assets**
+
+And also: 
+
+```
+If Whitehats can demonstrate a critical impact of code in production for an asset not in scope, Polygon Labs encourages you to submit your bug report using the “primacy of impact exception” asset as outlined below 
+
+```
+
 I found the way in which the company behaved sad and wrong, given the seriousness of the vulnerability, at least a bonus of a few thousand dollars would have been correct to give. I think it is useless to put absurd bounties that reach a million dollars for a single vulnerability on protocols, if then things like this are not managed appropriately. I felt a bit scammed by the company, but it's their personal choice and how they manage their security posture, I hope they never suffer big data leaks and financial losses through web apps in the future.
+
+During the triage phase of the report, being my first report on the immunefi platform, I contacted [@0xMackenzieM](https://twitter.com/0xMackenzieM) for clarifications as it seemed that Polygon did not want to accept the vulnerability. I really appreciated the support given by immunefi, but in particular from [@0xMackenzieM](https://twitter.com/0xMackenzieM) in private chat. It was really good, perhaps to date the best triager that I met on each used platform.
+
+He updated me every time he had news in chat without any problem, he was super professional and kind and I really appreciated every message that he forwarded me, also dedicating time to have a chat about hacking and web2/3. 
+
 
 ## Writeup 2 - Stored XSS in subdomain.target2.com
 
@@ -68,7 +88,7 @@ Once I generated a working payload, I immediately reported it to the Bug Bounty 
 
 In this case, the program accepted the vulnerability, but didn't pay the bounty I expected. Of the three companies, it was the one with the smallest bounties, at a maximum of $3000, the other two companies had bounties of up to a million dollars.
 
-I thought the minimum for a stored should have been at least $1000 dollars. The company determined that the vulnerability was less critical. I also escalated it to information disclosure of sensitive data explaining to the triager why I thought it was more critical, but the triager didn't change his mind about it. 
+I thought the minimum for a stored should have been at least $1000 dollars. The company determined that the vulnerability was less critical. I also escalated it to information disclosure of sensitive data explaining to the triager because I thought it was more critical, but the triager didn't change his mind about it. 
 
 In any case, even if I didn't agree with the criticality selected, I'm glad I helped the company and that at least a $350 bounty was given to me, in recognition of my work.
 
@@ -84,7 +104,7 @@ Analyzing both the registration and authentication phases, my eye noticed someth
 
 In short, if you had an account registered on the platform using the OAuth2 functions, you could access using facebook, google or any third party service used during account registration. So far so normal. 
 
-The anomalous behavior was that, if you tried to register an account with the same email manually (without OAuth2), you were able to do so and the user would receive a confirmation email for creating the account, but not you could access the profile using that email and password until your email was confirmed. 
+The anomalous behavior was that, if you tried to register an account with the same email manually (without OAuth2), you were able to do so and the user would receive a confirmation email for creating the account, but you could not access the profile using that email and password until your email was confirmed. 
 
 **An odd way to set the password to an existing account created with OAuth2**, but so far unless you figure out a way to bypass the confirmation email, you don't have an account takeover.
 
@@ -106,7 +126,7 @@ The attack only worked thanks to the redirect endpoint found by analyzing and fu
 5. The attacker returns to the browser and changes from the previous link the account Token Code with a new random Token and continues to press the generated button.
 6. If the Token is wrong too many times, the code sent to the victim will no longer work. Attacker's ip in most cases will be banned by Cloudflare.
 7. Now every time the attacker presses the button, he will first be redirected to the Mobile App and then back to the browser after the app crashes.
-8. The attacker try to open the Mobile app normally. The first time it will crash. The attacker tries to reopen the Mobile App.
+8. The attacker tries to open the Mobile app normally. The first time it will crash. The attacker tries to reopen the Mobile App.
 9. The app will open and the attacker will go to login and enter the credentials previously used in the registration phase, although the account has never been validated with the right Token Code.
 
 **Now the attacker will be logged into the victim's account, despite never entering the correct verification code.**
@@ -147,3 +167,6 @@ I didn't spend much time doing bug bounties, as I was still in university exam s
 I'm not very happy with how some teams handled the reported web2 vulnerabilities. I think companies of this caliber should care more about their security posture, not only with regard to web3 and protocols, but also with regard to the centralized web2 platforms they use. Even through simple web vulnerabilities it is possible to suffer serious data breaches and financial losses, and I believe that some companies do not give due importance to web2 vulnerabilities, when they should.
 
 Individually, however, I really appreciated the management of the report by the latest program, the promptness in the fix and the related bounty. I congratulate their team a lot and hope I can find something else in the future in their platform.
+
+I really appreciated the mediation made by [@0xMackenzieM](https://twitter.com/0xMackenzieM), I found it a splendid person and I hope to be able to work/chat other times with him in the future.
+
