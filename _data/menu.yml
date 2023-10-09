@@ -3,7 +3,7 @@ entries:
     entries:
       - title: <b>Some things I brag about</b>
         entries:
-          - title: "<a href='https://nvd.nist.gov/vuln/detail/CVE-2022-4105'><b>CVE-2022-4105 </b></a> Stored XSS in KiwiTCMS library leads to account takeover and exploitation of various endpoints. Possibility of wormable XSS to broke the system."
+          - title: "<a href='https://nvd.nist.gov/vuln/detail/CVE-2022-4105'><b>CVE-2022-4105 </b></a>Markdown injection leads to Stored XSS in KiwiTCMS library. Possibility to account takeover and exploitation of various endpoints."
           - title: "<a href='https://nvd.nist.gov/vuln/detail/CVE-2023-27489'><b>CVE-2023-27489</b></a> another Stored XSS in KiwiTCMS"
           - title: "<a href='https://nvd.nist.gov/vuln/detail/CVE-2023-32686'><b>CVE-2023-32686</b></a> Stored XSS with weak WAF bypass and CSP bypass in KiwiTCMS."
           - title: "Telecom Italia's <a href='https://www.gruppotim.it/en/footer/responsible-disclosure.html'> Responsible Disclosure Hall of Fame </a>"
