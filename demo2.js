@@ -4,7 +4,7 @@ function base64Encode(str) {
     return base64;
 }
 
- const url = "https://0.0.0.0:8000";
+ const url = "http://0.0.0.0:8000";
 
 // const url = "https://radar.toolsfdg.net/";
 
