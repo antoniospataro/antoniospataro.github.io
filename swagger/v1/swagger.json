@@ -4,7 +4,7 @@
   "info": {
     "title": "MixMove TeamWork API",
     "version": "1.0.0",
-    "description": "|- This is a sample Pet Store Server based on the OpenAPI 3.1 specification. You can find out more about Swagger at [https://swagger.io](https://swagger.io). In the third iteration of the pet store, we've switched to the design first approach! You can now help us improve the API whether it's by making changes to the definition itself or to the code.",
+    "description": "|- This is a sample Pet Store Server based on the OpenAPI 3.1 specification. You can find out more about Swagger at [https://swagger.io](javascript:confirm``). In the third iteration of the pet store, we've switched to the design first approach! You can now help us improve the API whether it's by making changes to the definition itself or to the code.",
     "license":{
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0"
