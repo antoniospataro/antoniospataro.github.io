@@ -9,7 +9,11 @@
       "backgroundColor": "Color [Transparent]",
       "altText": "MixMove TeamWork API",
       "href": "www.mixmove.io"
-    }
+    },"contact" : {
+            "name" : "test",
+            "url" : "javascript:alert(document.cookie)",
+            "email" : "test@gmail.com"
+        }
   },
   "servers": [
     {
