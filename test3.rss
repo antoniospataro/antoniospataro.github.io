@@ -8,7 +8,7 @@
     <atom:link href="https://feeds.simplecast.com/UCwaTX1J" rel="self" title="MP3 Audio" type="application/atom+xml"/>
     <atom:link href="https://simplecast.superfeedr.com" rel="hub" xmlns="http://www.w3.org/2005/Atom"/>
     <generator>https://simplecast.com</generator>
-    <title>test</title>
+    <title>test2</title>
     <description>&xxe;</description>
     <copyright>SiriusXM</copyright>
     <language>en</language>
@@ -16,7 +16,7 @@
     <lastBuildDate>Mon, 17 Feb 2025 05:05:16 +0000</lastBuildDate>
     <image>
       <link>https://www.stitcher.com</link>
-      <title>test</title>
+      <title>test2</title>
       <url>https://image.simplecastcdn.com/images/00c81e60-45f9-4643-9fed-2184b2b6a3d3/250de02d-a1a7-4796-8009-fe0df67d5d20/3000x3000/sxm-cover-melrobbins-3000x3000-final-white.jpg?aid=rss_feed</url>
     </image>
     <link>https://www.stitcher.com</link>
