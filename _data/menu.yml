@@ -3,6 +3,9 @@ entries:
     entries:
       - title: <b>Some things I brag about</b>
         entries:
+          - title: "<a href='https://nvd.nist.gov/vuln/detail/CVE-2025-5062'><b>CVE-2025-5062</b></a> Blind XSS leads to becoming Admin with full privileges on every website developed with Wordpress-Woocommerce (fixed in the version 9.4.3)"
+          - title: "<a href='https://nvd.nist.gov/vuln/detail/cve-2024-48917'><b>CVE-2024-48917</b></a> XXE in the new version by using a payload in the encoding UTF-7, and adding at end of the file a comment with the value encoding=”UTF-8” to match the wrong regex in the code" 
+          - title: "<a href='https://nvd.nist.gov/vuln/detail/CVE-2024-47873'><b>CVE-2024-47873</b></a> XXE via regex bypass by using UCS-4 and encoding guessing in PHPSpreadSheet"
           - title: "<a href='https://nvd.nist.gov/vuln/detail/CVE-2024-21627'><b>CVE-2024-21627  </b></a>Bypassing the Validate::isCleanHTML method leads to obtaining XSS in every input sanitized with that method in PrestaShop CMS"
           - title: "<a href='https://nvd.nist.gov/vuln/detail/CVE-2022-4105'><b>CVE-2022-4105 </b></a>Markdown injection leads to Stored XSS in KiwiTCMS library. Possibility to account takeover and exploitation of various endpoints."
           - title: "<a href='https://nvd.nist.gov/vuln/detail/CVE-2023-27489'><b>CVE-2023-27489</b></a> another Stored XSS in KiwiTCMS"
