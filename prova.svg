@@ -11,12 +11,7 @@
   </style>
   <!-- Common use case: embed HTML text into SVG -->
   <foreignObject id="icon-id"  x="20" y="20" width="200" height="200">
-    <!--
-      In the context of SVG embedded in an HTML document, the XHTML
-      namespace could be omitted, but it is mandatory in the
-      context of an SVG document
-    -->
-    <script>alert("XSS\n"+window.origin);</script>
+    
     <div xmlns="http://www.w3.org/1999/xhtml">
       <form action="https://example.com">
       <input type="text" />
