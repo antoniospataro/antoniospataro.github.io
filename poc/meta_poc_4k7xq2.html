@@ -39,16 +39,16 @@ function openDoubleWindow() {
   // anche un click sul bordo cade dentro il bottone FB (margine di tolleranza sulla misura).
   const escaW = FIT.W - 8, escaH = FIT.H - 2;
 
-  // Popup grande quasi quanto lo schermo ma NON fullscreen (10px di margine):
-  // cosi' il focus resta sulla pagina FB sotto (osservato su Windows e Debian)
-  // e il mousemove che abilita il bottone arriva comunque.
-  const margin = 10;
-  const winWidth = window.screen.width - margin * 2;
-  const winHeight = window.screen.height - margin * 2;
+  // Larga quanto lo schermo, 1px piu' corta in basso: sembra fullscreen (il
+  // pixel mancante sta sotto la taskbar) ma NON lo e', cosi' il focus resta
+  // sulla pagina FB sotto (osservato su Windows e Debian) e il mousemove che
+  // abilita il bottone arriva comunque.
+  const winWidth = window.screen.width;
+  const winHeight = window.screen.height - 1;
   const demoUrl = new URL("demo.html", window.location.href).href; // stessa directory della pagina
   var evilWindow = window.open(demoUrl,
         "_blank",
-        `width=${winWidth},height=${winHeight},top=${margin},left=${margin}`);
+        `width=${winWidth},height=${winHeight},top=0,left=0`);
 
   evilWindow.onload = function () {
     evilWindow.document.open();
