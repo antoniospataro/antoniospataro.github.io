@@ -39,12 +39,15 @@ function openDoubleWindow() {
   // anche un click sul bordo cade dentro il bottone FB (margine di tolleranza sulla misura).
   const escaW = FIT.W - 8, escaH = FIT.H - 2;
 
-  const winWidth = window.screen.width;
-  const winHeight = window.screen.height;
+  // Popup piu' piccolo dello schermo: la striscia di finestra FB scoperta intorno
+  // viene attraversata dal cursore su QUALUNQUE OS -> il mousemove abilita il bottone.
+  const margin = 60;
+  const winWidth = window.screen.width - margin * 2;
+  const winHeight = window.screen.height - margin * 2;
   const demoUrl = new URL("demo.html", window.location.href).href; // stessa directory della pagina
   var evilWindow = window.open(demoUrl,
         "_blank",
-        `width=${winWidth},height=${winHeight},top=0,left=0`);
+        `width=${winWidth},height=${winHeight},top=${margin},left=${margin}`);
 
   evilWindow.onload = function () {
     evilWindow.document.open();
