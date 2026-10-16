@@ -6,21 +6,23 @@
 <body>
 <script>
 /* Costanti del dialog Meta, fittate sulle misure:
-   {iw:811,  x:67,  y:372, w:664, h:27}
-   {iw:1366, x:346, y:369, w:662, h:31}
-   Se il layout cambia o cambi browser/locale: ricalibra qui. */
+   {iw:811,  x:67,  y:372, w:664, h:27, ih:654}   (Debian)
+   {iw:1366, x:346, y:369, w:662, h:31, ih:654}   (Debian)
+   {iw:1920, x:623, y:510, w:659, h:32, ih:945}   (Windows)
+   x centrato: 0.503*iw - 341;  y cresce con l'altezza: 0.481*ih + 55 */
 const FIT = {
   BX: 279 / 555,                // pendenza di x rispetto a innerWidth (bottone centrato)
   AX: 346 - (279 / 555) * 1366, // intercetta (≈ -340.7)
-  Y: 370,                       // y del bottone nella viewport — PROVVISORIO: da confermare a diversa altezza finestra
+  BY: 140 / 291,                // pendenza di y rispetto a innerHeight
+  AY: 370 - (140 / 291) * 654,  // intercetta (≈ 55.4)
   W: 663,
   H: 31,
 };
 
 const DEBUG = new URLSearchParams(location.search).has('debug');
 
-function fbBtnCenterViewport(iw) {
-  return { cx: FIT.BX * iw + FIT.AX + FIT.W / 2, cy: FIT.Y + FIT.H / 2 };
+function fbBtnCenterViewport(iw, ih) {
+  return { cx: FIT.BX * iw + FIT.AX + FIT.W / 2, cy: FIT.BY * ih + FIT.AY + FIT.H / 2 };
 }
 
 function openDoubleWindow() {
@@ -30,7 +32,7 @@ function openDoubleWindow() {
   const facebookLoginUrl = `https://www.facebook.com/v17.0/dialog/oauth?client_id=${facebookAppId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=${encodeURIComponent(scope)}`;
 
   // Bottone FB in coordinate SCHERMO (questa finestra non cambia dimensioni navigando).
-  const c = fbBtnCenterViewport(window.innerWidth);
+  const c = fbBtnCenterViewport(window.innerWidth, window.innerHeight);
   const topChrome = window.outerHeight - window.innerHeight; // toolbar; assumo nessuna scrollbar orizzontale
   const btnScreenX = window.screenX + c.cx;                  // niente chrome a sinistra
   const btnScreenY = window.screenY + topChrome + c.cy;
@@ -137,8 +139,9 @@ Click the button to start the proof-of-concept. To ensure the proof-of-concept w
   <li>You should allow popups from this page.</li>
   <li>Zoom at 100% (Ctrl+0). The browser window can be any size &mdash; the geometry adapts.</li>
   <li>First run: open <b>index.html?debug=1</b> to verify the red outline sits exactly on the blue Meta button. Do not click.</li>
+  <li><b>Calibration step:</b> if the red outline does NOT sit on the Meta button on your machine, measure the real button and update the <b>FIT</b> constants at the top of this file. Open the same OAuth URL in a tab (logged in, maximized, zoom 100%), press F12, paste the snippet from the report in the console: first Q with the mouse on the button's top-left corner, second Q on the bottom-right corner. The snippet prints the RECT to copy into FIT (x, y, w, h and the formula for x uses your measured iw).</li>
 </ul>
 
-<button style="position:fixed; left:8px; bottom:6px;" onclick="openDoubleWindow()">Start Demo</button>
+<button style="font-size:18px; padding:10px 24px;" onclick="openDoubleWindow()">Start Demo</button>
 </body>
 </html>
