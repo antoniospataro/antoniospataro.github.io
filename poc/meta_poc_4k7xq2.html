@@ -39,9 +39,10 @@ function openDoubleWindow() {
   // anche un click sul bordo cade dentro il bottone FB (margine di tolleranza sulla misura).
   const escaW = FIT.W - 8, escaH = FIT.H - 2;
 
-  // Popup piu' piccolo dello schermo: la striscia di finestra FB scoperta intorno
-  // viene attraversata dal cursore su QUALUNQUE OS -> il mousemove abilita il bottone.
-  const margin = 60;
+  // Popup grande quasi quanto lo schermo ma NON fullscreen (10px di margine):
+  // cosi' il focus resta sulla pagina FB sotto (osservato su Windows e Debian)
+  // e il mousemove che abilita il bottone arriva comunque.
+  const margin = 10;
   const winWidth = window.screen.width - margin * 2;
   const winHeight = window.screen.height - margin * 2;
   const demoUrl = new URL("demo.html", window.location.href).href; // stessa directory della pagina
@@ -138,6 +139,6 @@ Click the button to start the proof-of-concept. To ensure the proof-of-concept w
   <li>First run: open <b>index.html?debug=1</b> to verify the red outline sits exactly on the blue Meta button. Do not click.</li>
 </ul>
 
-<button onclick="openDoubleWindow()">Start Demo</button>
+<button style="position:fixed; left:8px; bottom:6px;" onclick="openDoubleWindow()">Start Demo</button>
 </body>
 </html>
